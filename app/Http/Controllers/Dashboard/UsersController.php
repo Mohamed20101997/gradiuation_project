@@ -77,7 +77,7 @@ class UsersController extends Controller
             'role' => 'required',
             'password' => 'sometimes|confirmed',
         ]);
-//        try{
+        try{
 
             $user =  Admin::find($request->id);
 
@@ -95,9 +95,9 @@ class UsersController extends Controller
 
             return redirect()->route('user.index');
 
-//        }catch(\Exception $e){
-//            return redirect()->back()->with(['error'=>'there is problem please try again']);
-//        }
+        }catch(\Exception $e){
+            return redirect()->back()->with(['error'=>'there is problem please try again']);
+        }
     }
 
 

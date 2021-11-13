@@ -5,7 +5,7 @@
 
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('welcome') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('user.index') }}">Usres</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('user.index') }}">Users</a></li>
         <li class="breadcrumb-item" active>Update</li>
     </ul>
 

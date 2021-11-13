@@ -20,6 +20,12 @@ Route::group(['middleware'=>['auth:admin'],'prefix'=>'admin'], function () {
 
     Route::resource('user', 'UsersController')->except('show');
 
+    Route::resource('college', 'CollegeController')->except('show');
+
+    Route::resource('semester', 'SemesterController')->except('show');
+
+    Route::resource('subject', 'SubjectController')->except('show');
+
     //logout route
     Route::post('logout', 'AuthController@logout')->name('logout');
 

@@ -2,11 +2,11 @@
 
 @section('content')
 
-    <h1>Users</h1>
+    <h1>Colleges</h1>
 
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('welcome') }}">Dashboard</a></li>
-        <li class="breadcrumb-item" active>Users</li>
+        <li class="breadcrumb-item" active>Colleges</li>
     </ul>
 
 
@@ -22,48 +22,35 @@
                             </div>
                         </div><!-- end of col 4 -->
 
-                        <div class="col-2">
-                            <select name="role" class="form-control">
-                                <option value="">All Roles</option>
-                                <option value="2" {{ request()->role == 2 ? 'selected' : '' }}>Doctor</option>
-                                <option value="3" {{ request()->role == 3 ? 'selected' : '' }}>Student</option>
-                            </select>
-                        </div>
-
                         <div class="col-4">
                             <button type="submit" class="btn btn-success"><i class="fa fa-search"></i>Search</button>
-                            <a href="{{ route('user.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i>Add</a>
+                            <a href="{{ route('college.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i>Add</a>
                         </div> <!-- end of col 12 -->
 
                     </div> <!-- end of row -->
                 </form> <!-- end of form -->
                 <div class="row">
                     <div class="col-md-12">
-                        @if ($users->count() > 0)
+                        @if ($colleges->count() > 0)
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>email</th>
-                                    <th>role</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                @foreach ($users as $index=>$user)
+                                @foreach ($colleges as $index=>$college)
                                     <tr>
                                         <td>{{ $index+1 }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-
-                                        <td><p class="badge badge-secondary p-2">{{ $user->role == 2 ? 'Doctor' : 'Student' }}</p></td>
+                                        <td>{{ $college->name }}</td>
 
                                         <td>
-                                            <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ route('college.edit', $college->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
 
-                                            <form method="post" action={{ route('user.destroy', $user->id)}} style="display:inline-block">
+                                            <form method="post" action={{ route('college.destroy', $college->id)}} style="display:inline-block">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger btn-sm delete"><i class="fa fa-trash"></i></button>
@@ -75,7 +62,7 @@
                                 </tbody>
                             </table>
 
-                            {{ $users->appends(request()->query())->links() }}
+                            {{ $colleges->appends(request()->query())->links() }}
 
                         @else
                             <h3 class="alert alert-info text-center d-flex justify-content-center" style="margin: 0 auto; font-weight: 400"><i class="fa fa-exclamation-triangle"></i> Sorry no records found</h3>
