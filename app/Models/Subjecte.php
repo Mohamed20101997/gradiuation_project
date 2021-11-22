@@ -7,10 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Subjecte extends Model
 {
     protected $fillable = ['name','hours','college_id','semester_id','doctor_id'];
-
-
-
-
+    public $timestamps = false;
 
 
     ///////////////// Relation ////////////

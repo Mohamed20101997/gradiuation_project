@@ -6,19 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 
-class UsersController extends Controller
+class DoctorController extends Controller
 {
 
     public function index()
     {
-        $users = Admin::where('role','!=','1')->whenSearch(Request()->search)->whenRole(Request()->role)->paginate(5);
-        return view('dashboard.users.index',compact('users'));
+        $doctors = Admin::where('role','!=','1')->whenSearch(Request()->search)->whenRole(Request()->role)->paginate(5);
+        return view('dashboard.doctors.index',compact('doctors'));
     }
 
 
     public function create()
     {
-        return view('dashboard.users.create');
+        return view('dashboard.doctors.create');
     }
 
     public function store(Request $request)
@@ -61,7 +61,7 @@ class UsersController extends Controller
     {
         $user = Admin::find($id);
         if($user){
-            return view('dashboard.users.edit', compact('user'));
+            return view('dashboard.doctors.edit', compact('user'));
         }else{
             return redirect()->back()->with(['error'=>'this author is not found']);
         }

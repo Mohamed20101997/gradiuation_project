@@ -27,7 +27,6 @@ class CreateSubjectesTable extends Migration
             $table->unsignedBigInteger('doctor_id');
             $table->foreign('doctor_id')->references('id')->on('admins')->onDelete('cascade');
 
-            $table->timestamps();
         });
     }
 

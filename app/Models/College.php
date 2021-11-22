@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class College extends Model
 {
     protected $fillable = ['name'];
+    public $timestamps = false;
 
 
     public function scopeWhenSearch($query , $search)
