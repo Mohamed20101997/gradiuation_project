@@ -3,29 +3,30 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\Doctor;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 
-class DoctorController extends Controller
+class AdminController extends Controller
 {
 
     public function index()
     {
-        $doctors = Doctor::whenSearch(Request()->search)->paginate(5);
-        return view('dashboard.doctors.index',compact('doctors'));
+        $auth = auth()->guard('admin')->user()->id;
+        $admins = Admin:: where('id', '!=', $auth)->whenSearch(Request()->search)->paginate(5);
+        return view('dashboard.admins.index',compact('admins'));
     }
 
 
     public function create()
     {
-        return view('dashboard.doctors.create');
+        return view('dashboard.admins.create');
     }
 
     public function store(Request $request)
     {
 
         $request->validate([
-            'email' => 'required|unique:doctors,email|email',
+            'email' => 'required|unique:admins,email|email',
             'name' => 'required',
             'password' => 'required|confirmed|min:6',
         ]);
@@ -38,11 +39,11 @@ class DoctorController extends Controller
                 $data['password'] = bcrypt($data['password']);
             }
 
-            Doctor::create($data);
+            Admin::create($data);
 
-            session()->flash('success', 'Doctor added successfully');
+            session()->flash('success', 'Admin added successfully');
 
-            return redirect()->route('doctor.index');
+            return redirect()->route('admin.index');
 
         }catch(\Exception $e){
             return redirect()->back()->with(['error'=>'there is problem please try again']);
@@ -58,11 +59,11 @@ class DoctorController extends Controller
 
     public function edit($id)
     {
-        $doctor = Doctor::find($id);
-        if($doctor){
-            return view('dashboard.doctors.edit', compact('doctor'));
+        $admin = Admin::find($id);
+        if($admin){
+            return view('dashboard.admins.edit', compact('admin'));
         }else{
-            return redirect()->back()->with(['error'=>'this doctor is not found']);
+            return redirect()->back()->with(['error'=>'this admin is not found']);
         }
 
     }
@@ -71,27 +72,27 @@ class DoctorController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'email' => 'required|email|unique:doctors,email,'.$id,
+            'email' => 'required|email|unique:admins,email,'.$id,
             'name' => 'required',
             'password' => 'sometimes|confirmed',
         ]);
         try{
 
-            $doctor =  Doctor::find($request->id);
+            $admin =  Admin::find($request->id);
 
             $data = $request->except('_token');
 
             if(!empty($data['password'])){
                 $data['password'] = bcrypt($data['password']);
             }else{
-                $data['password'] = $doctor->password;
+                $data['password'] = $admin->password;
             }
 
-            $doctor->update($data);
+            $admin->update($data);
 
-            session()->flash('success', 'Doctor Updated successfully');
+            session()->flash('success', 'Admin Updated successfully');
 
-            return redirect()->route('doctor.index');
+            return redirect()->route('admin.index');
 
         }catch(\Exception $e){
             return redirect()->back()->with(['error'=>'there is problem please try again']);
@@ -102,18 +103,18 @@ class DoctorController extends Controller
     public function destroy($id)
     {
         try{
-            $doctor =  Doctor::find($id);
+            $admin =  Admin::find($id);
 
-            if(!$doctor)
+            if(!$admin)
             {
-                return redirect()->back()->with(['error'=>'doctor not found']);
+                return redirect()->back()->with(['error'=>'admin not found']);
             }
 
-            $doctor->delete();
+            $admin->delete();
 
-            session()->flash('success', 'Doctor deleted successfully');
+            session()->flash('success', 'Admin deleted successfully');
 
-            return redirect()->route('doctor.index');
+            return redirect()->route('admin.index');
 
         }catch(\Exception $e){
 

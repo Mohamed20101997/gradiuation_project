@@ -3,30 +3,34 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\Doctor;
+use App\Models\College;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
-class DoctorController extends Controller
+class StudentController extends Controller
 {
 
     public function index()
     {
-        $doctors = Doctor::whenSearch(Request()->search)->paginate(5);
-        return view('dashboard.doctors.index',compact('doctors'));
+
+        $students = Student::whenSearch(Request()->search)->paginate(5);
+        return view('dashboard.students.index',compact('students'));
     }
 
 
     public function create()
     {
-        return view('dashboard.doctors.create');
+        $colleges = College::get();
+        return view('dashboard.students.create','colleges');
     }
 
     public function store(Request $request)
     {
 
         $request->validate([
-            'email' => 'required|unique:doctors,email|email',
+            'email' => 'required|unique:students,email|email',
             'name' => 'required',
+            'college_id' =>'required|exists:colleges,id',
             'password' => 'required|confirmed|min:6',
         ]);
 
@@ -38,11 +42,11 @@ class DoctorController extends Controller
                 $data['password'] = bcrypt($data['password']);
             }
 
-            Doctor::create($data);
+            Student::create($data);
 
-            session()->flash('success', 'Doctor added successfully');
+            session()->flash('success', 'Student added successfully');
 
-            return redirect()->route('doctor.index');
+            return redirect()->route('student.index');
 
         }catch(\Exception $e){
             return redirect()->back()->with(['error'=>'there is problem please try again']);
@@ -58,11 +62,12 @@ class DoctorController extends Controller
 
     public function edit($id)
     {
-        $doctor = Doctor::find($id);
-        if($doctor){
-            return view('dashboard.doctors.edit', compact('doctor'));
+        $student = Student::find($id);
+        $colleges = College::get();
+        if($student){
+            return view('dashboard.students.edit', compact('student','colleges'));
         }else{
-            return redirect()->back()->with(['error'=>'this doctor is not found']);
+            return redirect()->back()->with(['error'=>'this student is not found']);
         }
 
     }
@@ -71,27 +76,28 @@ class DoctorController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'email' => 'required|email|unique:doctors,email,'.$id,
+            'email' => 'required|email|unique:students,email,'.$id,
             'name' => 'required',
+            'college_id' =>'required|exists:colleges,id',
             'password' => 'sometimes|confirmed',
         ]);
         try{
 
-            $doctor =  Doctor::find($request->id);
+            $student =  Student::find($request->id);
 
             $data = $request->except('_token');
 
             if(!empty($data['password'])){
                 $data['password'] = bcrypt($data['password']);
             }else{
-                $data['password'] = $doctor->password;
+                $data['password'] = $student->password;
             }
 
-            $doctor->update($data);
+            $student->update($data);
 
-            session()->flash('success', 'Doctor Updated successfully');
+            session()->flash('success', 'Student Updated successfully');
 
-            return redirect()->route('doctor.index');
+            return redirect()->route('student.index');
 
         }catch(\Exception $e){
             return redirect()->back()->with(['error'=>'there is problem please try again']);
@@ -102,18 +108,18 @@ class DoctorController extends Controller
     public function destroy($id)
     {
         try{
-            $doctor =  Doctor::find($id);
+            $student =  Student::find($id);
 
-            if(!$doctor)
+            if(!$student)
             {
-                return redirect()->back()->with(['error'=>'doctor not found']);
+                return redirect()->back()->with(['error'=>'student not found']);
             }
 
-            $doctor->delete();
+            $student->delete();
 
-            session()->flash('success', 'Doctor deleted successfully');
+            session()->flash('success', 'Student deleted successfully');
 
-            return redirect()->route('doctor.index');
+            return redirect()->route('student.index');
 
         }catch(\Exception $e){
 

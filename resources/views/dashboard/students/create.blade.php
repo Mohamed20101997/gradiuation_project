@@ -1,11 +1,11 @@
 @extends('layouts.dashboard.app')
 
 @section('content')
-<h1>Users</h1>
+<h1>Students</h1>
 
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('welcome') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('user.index') }}">Users</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('student.index') }}">Students</a></li>
         <li class="breadcrumb-item" active>Add</li>
     </ul>
 
@@ -14,7 +14,7 @@
     <div class="col-md-12">
 
         <div class="tile mb4">
-            <form method="POST" action="{{ route('user.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('student.store') }}" enctype="multipart/form-data">
                 @csrf
                 @method('post')
                 <div class="row">
@@ -40,20 +40,21 @@
                         </div>
                     </div>{{-- end of col Email --}}
 
-                    <div class="col-md-4">
-                        {{-- Role --}}
-                        <div class="form-group">
-                            <label>Role</label>
-                                <select class="form-control" name="role"  required>
-                                    <option value="">Choose the Role</option>
-                                    <option value="2" name="categories">Doctor</option>
-                                    <option value="3" name="tags">Student</option>
-                                </select>
-                            @error('role')
-                                <div class="text-danger">{{$message}}</div>
-                            @enderror
-                        </div>
-                    </div>{{-- end of col role --}}
+                    {{-- College --}}
+                    <div class="form-group">
+                        <label>College</label>
+                        <select class="form-control" name="role"  required>
+                            <option value="">Choose the College</option>
+                            @foreach($colleges as $college)
+                                //
+                            @endforeach
+                        </select>
+                        @error('role')
+                        <div class="text-danger">{{$message}}</div>
+                        @enderror
+                    </div>
+                </div>{{-- end of col role --}}
+
                 </div> {{-- end of row --}}
 
                 <div class="row">

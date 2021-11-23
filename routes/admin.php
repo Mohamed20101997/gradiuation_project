@@ -18,7 +18,11 @@ Route::group(['middleware'=>['auth:admin'],'prefix'=>'admin'], function () {
 
     Route::get('/','WelcomeController@index')->name('welcome');
 
+    Route::resource('admin', 'AdminController')->except('show');
+
     Route::resource('doctor', 'DoctorController')->except('show');
+
+    Route::resource('student', 'StudentController')->except('show');
 
 
     Route::resource('college', 'CollegeController')->except('show');

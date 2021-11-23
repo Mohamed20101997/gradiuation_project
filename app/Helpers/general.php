@@ -50,7 +50,7 @@ function image_path($val)
 
 
  function user(){
-    return auth()->guard('users');
+    return auth()->guard('admins');
 }
 
 function average($id){

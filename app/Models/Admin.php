@@ -10,11 +10,10 @@ class Admin extends Authenticatable
 {
     use Notifiable;
 
-    protected $fillable = ['name', 'email', 'password','role'];
+    protected $fillable = ['name', 'email', 'password'];
 
     protected $hidden = ['password', 'remember_token'];
     public $timestamps = false;
-
 
 
 
@@ -27,13 +26,5 @@ class Admin extends Authenticatable
 
     } //end of scopeWhenSearch
 
-
-    public function scopeWhenRole($query , $search)
-    {
-        return $query->when($search , function($q) use ($search){
-            return $q->where('role',$search) ;
-        });
-
-    } //end of scopeWhenSearch
 
 }
