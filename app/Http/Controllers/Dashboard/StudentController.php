@@ -21,7 +21,7 @@ class StudentController extends Controller
     public function create()
     {
         $colleges = College::get();
-        return view('dashboard.students.create','colleges');
+        return view('dashboard.students.create',compact('colleges'));
     }
 
     public function store(Request $request)

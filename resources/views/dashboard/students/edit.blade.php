@@ -1,11 +1,11 @@
 @extends('layouts.dashboard.app')
 
 @section('content')
-    <h1>Doctors</h1>
+    <h1>Students</h1>
 
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('welcome') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('doctor.index') }}">Doctors</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('student.index') }}">Students</a></li>
         <li class="breadcrumb-item" active>Update</li>
     </ul>
 
@@ -13,34 +13,49 @@
         <div class="col-md-12">
 
             <div class="tile mb4">
-                <form class="form" action="{{route('doctor.update', $doctor->id)}}"
+                <form class="form" action="{{route('student.update', $student->id)}}"
                       method="post">
                     @csrf
                     @method('put')
-                    <input name="id" value="{{$doctor->id}}" type="hidden">
+                    <input name="id" value="{{$student->id}}" type="hidden">
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             {{-- Name --}}
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" name="name" placeholder="Enter the name" class="form-control" required value="{{ old('name',$doctor->name) }}">
+                                <input type="text" name="name" placeholder="Enter the name" class="form-control" required value="{{ old('name',$student->name) }}">
                                 @error('name')
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
                             </div>
                         </div>{{-- end of col name --}}
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             {{-- Email --}}
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email"  placeholder="Enter the email"  name="email" class="form-control" required value="{{ old('email',$doctor->email) }}">
+                                <input type="email"  placeholder="Enter the email"  name="email" class="form-control" required value="{{ old('email',$student->email) }}">
                                 @error('email')
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
                             </div>
                         </div>{{-- end of col Email --}}
+                        <div class="col-md-4">
+                            {{-- College --}}
+                            <div class="form-group">
+                            <label>College</label>
+                            <select class="form-control" name="college_id"  required>
+                                <option value="">Choose the College</option>
+                                @foreach($colleges as $college)
+                                    <option  {{ old('college_id',$student->college_id) == $college->id ? "selected" : "" }} value="{{$college->id}}">{{$college->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('college_id')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                        </div>{{-- end of col college --}}
 
                     </div> {{-- end of row --}}
 

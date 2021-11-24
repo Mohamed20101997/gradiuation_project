@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
+use App\Models\Doctor;
 use App\Models\College;
 use App\Models\Semester;
 use App\Models\Subjecte;
@@ -31,7 +31,7 @@ class SubjectController extends Controller
     {
         $colleges   = College::get();
         $semesters  = Semester::get();
-        $doctors   = Admin::where('role',2)->get();
+        $doctors    = Doctor::get();
 
         return view('dashboard.subjects.create',compact('colleges','semesters','doctors'));
     }
@@ -49,15 +49,13 @@ class SubjectController extends Controller
             'hours'         => 'required|numeric',
             'college_id'    => 'required|exists:colleges,id',
             'semester_id'   => 'required|exists:semesters,id',
-            'doctor_id'     => 'required|exists:admins,id',
+            'doctor_id'     => 'required|exists:doctors,id',
         ]);
 
         try{
 
             $data = $request->except('_token');
-
             Subjecte::create($data);
-
             session()->flash('success', 'Subjecte added successfully');
 
             return redirect()->route('subject.index');
@@ -88,7 +86,7 @@ class SubjectController extends Controller
     {
         $colleges   = College::get();
         $semesters  = Semester::get();
-        $doctors   = Admin::where('role',2)->get();
+        $doctors   = Doctor::get();
         $subject = Subjecte::find($id);
         if($subject){
             return view('dashboard.subjects.edit', compact('subject','colleges','semesters','doctors'));
@@ -111,7 +109,7 @@ class SubjectController extends Controller
             'hours'         => 'required|numeric',
             'college_id'    => 'required|exists:colleges,id',
             'semester_id'   => 'required|exists:semesters,id',
-            'doctor_id'     => 'required|exists:admins,id',
+            'doctor_id'     => 'required|exists:doctors,id',
         ]);
         try{
             $subject = Subjecte::find($request->id);

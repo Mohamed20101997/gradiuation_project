@@ -22,7 +22,7 @@ class Subjecte extends Model
     }
 
     public function doctor(){
-        return $this->belongsTo(Admin::class, 'doctor_id', 'id');
+        return $this->belongsTo(Doctor::class, 'doctor_id', 'id');
     }
 
     public function scopeWhenSearch($query , $search)

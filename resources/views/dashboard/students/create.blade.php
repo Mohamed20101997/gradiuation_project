@@ -40,20 +40,21 @@
                         </div>
                     </div>{{-- end of col Email --}}
 
-                    {{-- College --}}
-                    <div class="form-group">
+                    <div class="col-md-4">
+                        {{-- College --}}
+                        <div class="form-group">
                         <label>College</label>
-                        <select class="form-control" name="role"  required>
+                        <select class="form-control" name="college_id"  required>
                             <option value="">Choose the College</option>
                             @foreach($colleges as $college)
-                                //
+                                <option  {{ old('college_id') == $college->id ? "selected" : "" }} value="{{$college->id}}">{{$college->name}}</option>
                             @endforeach
                         </select>
-                        @error('role')
-                        <div class="text-danger">{{$message}}</div>
+                        @error('college_id')
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
-                </div>{{-- end of col role --}}
+                    </div>{{-- end of col college --}}
 
                 </div> {{-- end of row --}}
 

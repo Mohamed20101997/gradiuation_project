@@ -25,7 +25,7 @@ class CreateSubjectesTable extends Migration
             $table->foreign('semester_id')->references('id')->on('semesters')->onDelete('cascade');
 
             $table->unsignedBigInteger('doctor_id');
-            $table->foreign('doctor_id')->references('id')->on('admins')->onDelete('cascade');
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
 
         });
     }
