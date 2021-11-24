@@ -22,9 +22,9 @@
                             </div>
                         </div><!-- end of col 4 -->
 
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-success"><i class="fa fa-search"></i>Search</button>
-                            <a href="{{ route('college.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i>Add</a>
+                        <div class="col-md-8">
+                            <button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
+                            <a href="{{ route('college.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i></a>
                         </div> <!-- end of col 12 -->
 
                     </div> <!-- end of row -->
@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         @if ($colleges->count() > 0)
-                            <table class="table table-hover">
+                            <table class="table table-hover table-responsive">
                                 <thead>
                                 <tr>
                                     <th>#</th>

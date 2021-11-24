@@ -38,8 +38,14 @@
                             <input type="checkbox" name="remember_token"><span class="label-text">Stay Signed in</span>
                         </label>
                     </div>
+                    <div class="toggle-flip">
+                        <label>
+                            <input name="role" type="checkbox"><span class="flip-indecator" data-toggle-on="Doctor" data-toggle-off="Admin"></span>
+                        </label>
+                    </div>
                 </div>
             </div>
+
             <div class="form-group btn-container">
                 <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
             </div>

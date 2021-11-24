@@ -16,12 +16,23 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $remember_token = $request->has('remember_token') ? true : false ;
+         //  $request-> role = on   its mean Doctor
+         //  $request-> role = off   its mean Admin
 
-        if(auth()->guard('admin')->attempt(['email'=> $request->input("email") ,'password' =>  $request->input("password")  ] , $remember_token))
-        {
-            return redirect()->route('welcome');
+        $remember_token = $request->has('remember_token') ? true : false ;
+        if($request->role == 'on'){
+            if(auth()->guard('doctor')->attempt(['email'=> $request->input("email") ,'password' =>  $request->input("password")  ] , $remember_token))
+            {
+                return redirect()->route('welcome');
+            }
+
+        }else{
+            if(auth()->guard('admin')->attempt(['email'=> $request->input("email") ,'password' =>  $request->input("password")  ] , $remember_token))
+            {
+                return redirect()->route('welcome');
+            }
         }
+
         return redirect()->back()->with(['error'=>'email or password is not correct']);
     }
 
