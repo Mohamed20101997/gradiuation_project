@@ -10,6 +10,12 @@ class College extends Model
     public $timestamps = false;
 
 
+    public function subject(){
+        return $this->hasMany(Subjecte::class , 'college_id','id');
+    }
+
+
+
     public function scopeWhenSearch($query , $search)
     {
         return $query->when($search , function($q) use ($search){

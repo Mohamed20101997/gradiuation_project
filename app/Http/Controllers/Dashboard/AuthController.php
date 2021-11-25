@@ -16,11 +16,13 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+
          //  $request-> role = on   its mean Doctor
          //  $request-> role = off   its mean Admin
 
         $remember_token = $request->has('remember_token') ? true : false ;
         if($request->role == 'on'){
+
             if(auth()->guard('doctor')->attempt(['email'=> $request->input("email") ,'password' =>  $request->input("password")  ] , $remember_token))
             {
                 return redirect()->route('welcome');
@@ -44,7 +46,11 @@ class AuthController extends Controller
     }
 
     private function getGaurd(){
-        return auth('admin');
+        if(auth()->guard('admin')->check()){
+            return auth('admin');
+        }else{
+            return auth('doctor');
+        }
     }
 
 

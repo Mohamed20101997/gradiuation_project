@@ -21,6 +21,10 @@
       <li><a class="app-menu__item  {{\Request::route()->getName() == 'student.index' ? 'active' : ''}}" href="{{ route('student.index') }}"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Students</span></a></li>
   </ul>
     @else
-        <li><a class="app-menu__item  {{\Request::route()->getName() == 'colleges.index' ? 'active' : ''}}" href="{{ route('colleges.index') }}"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Colleges</span></a></li>
+        @if(count(colleges()) > 0)
+            @foreach(colleges() as $college)
+                <li><a class="app-menu__item" href="{{ route('colleges.index', $college->id) }}"><i class="app-menu__icon fa fa-building"></i><span class="app-menu__label">{{$college->name}}</span></a></li>
+            @endforeach
+        @endif
     @endif
 </aside>

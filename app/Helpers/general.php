@@ -1,41 +1,19 @@
 
 <?php
 
-use App\Models\Review;
-use \App\Models\User;
+use App\Models\College;
 
-
-define('PAGINATION_COUNT', 15);
-
-function getFolder(){
-
-    return  app()->getLocale() === 'ar' ? 'css-rtl' : 'css';
-
-}
-
-function parent($id){
-    $paret  = \App\Models\Category::where('id', $id)->whereTranslation('locale','en')->get();
-    foreach ($paret as $p)
-    {
-         return $p->name;
-    }
-}
-
-
-function uploadImage($folder,$image){
+function uploadImage($folder, $image){
     $image->store('/public', $folder);
     $filename = $image->hashName();
     return  $filename;
  }
-
 
 function remove_previous($folder,$model)
  {
     Storage::disk($folder)->delete($model->image);
 
  } //end of remove_previous function
-
-
 
 function remove_image($folder,$image)
  {
@@ -48,28 +26,17 @@ function image_path($val)
     return asset('storage/images/'. $val);
  }
 
+function colleges(){
+    $doctor = auth()->guard('doctor')->user()->id;
 
- function user(){
-    return auth()->guard('admins');
+    $colleges = College::whereHas('subject', function ($query) use($doctor){
+        return $query->where('doctor_id', $doctor);
+    })->get();
+
+    return $colleges;
+
 }
 
-function average($id){
-    $rating = Review::where('product_id', $id)->get();
-    $count =  $rating->count();
-    $sum = 0 ;
-    foreach ($rating as $rat){
-        $sum += $rat->rating;
-    }
-    if($count > 0){
-        $average = floor($sum/$count);
-    }else{
-        $average = 0 ;
-    }
 
-    return $average;
-}
 
-function getUser($id){
-    return User::find($id);
-}
 
