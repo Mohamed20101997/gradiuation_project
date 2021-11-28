@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\College;
 use App\Models\DoctorSubject;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Subjecte;
 use Illuminate\Http\Request;
 
@@ -51,11 +50,7 @@ class CollegesController extends Controller
 
             if($request->file()){
 
-                \Image::make($request->files)->resize(300, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save(public_path('uploads/files/'. $request->files->hashName()));
-
-                $data['files'] = $request->files->hashName();
+                $data['files'] = uploadImage('public_uploads', $request->file('files'));
 
             }
 
@@ -91,18 +86,13 @@ class CollegesController extends Controller
             $data = $request->except('_token');
 
             $file =  DoctorSubject::where('id', $id)->first();
-
             if($request->file()){
-                \Storage::disk('public_uploads')->delete('/files/' . $file->files );
 
-                \Image::make($request->files)->resize(300, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save(public_path('uploads/files/'. $request->files->hashName()));
+                remove_image('public',$file->files);
 
-                $data['files'] = $request->files->hashName();
+                $data['files'] = uploadImage('public', $request->file('files'));
 
             }
-
 
             $file->update($data);
 
@@ -128,7 +118,8 @@ class CollegesController extends Controller
                 return redirect()->back()->with(['error'=>'file not found']);
             }
 
-            Storage::disk('public_uploads')->delete('/files/' . $file->files );
+
+            remove_image('public_uploads',$file->files);
             $file->delete();
 
             session()->flash('success', 'File deleted successfully');

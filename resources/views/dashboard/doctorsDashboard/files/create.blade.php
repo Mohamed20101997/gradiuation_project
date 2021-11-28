@@ -14,7 +14,7 @@
     <div class="col-md-12">
 
         <div class="tile mb4">
-            <form method="POST" action="{{ route('subject.doctor.store',$id) }}" enctype="multipart/form-data" files="true">
+            <form method="POST" action="{{ route('subject.doctor.store',$id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('post')
                 <div class="row">
