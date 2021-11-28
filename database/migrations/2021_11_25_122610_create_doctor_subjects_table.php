@@ -16,6 +16,9 @@ class CreateDoctorSubjectsTable extends Migration
         Schema::create('doctor_subjects', function (Blueprint $table) {
             $table->id();
 
+            $table->string('title');
+            $table->text('description');
+
             $table->unsignedBigInteger('subject_id');
             $table->foreign('subject_id')->references('id')->on('subjectes')->onDelete('cascade');
 

@@ -23,7 +23,7 @@ function remove_image($folder,$image)
 
 function image_path($val)
  {
-    return asset('storage/images/'. $val);
+    return asset('storage/images/public/'. $val);
  }
 
 function colleges(){

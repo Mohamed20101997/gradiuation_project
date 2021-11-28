@@ -46,7 +46,15 @@ Route::group(['middleware'=>['auth:doctor'],'prefix'=>'doctor'], function () {
 
     Route::get('subject/edit/{id}', 'CollegesController@edit')->name('subject.doctor.edit');
 
+    Route::post('subject/update/{id}', 'CollegesController@update')->name('subject.doctor.update');
+
     Route::get('subject/add/{id}', 'CollegesController@add')->name('subject.doctor.add');
+
+    Route::post('subject/store/{id}', 'CollegesController@store')->name('subject.doctor.store');
+
+    Route::post('subject/delete/{id}', 'CollegesController@delete')->name('subject.doctor.delete');
+
+
 
 });  /** End of Route Group doctor  */
 

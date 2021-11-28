@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class DoctorSubject extends Model
 {
-    protected $fillable = ['subject_id','doctor_id','files'];
-
+    protected $fillable = ['subject_id','doctor_id','files','title','description'];
+    public $timestamps = false;
 
     //////// Relations  //////////////
     ///
