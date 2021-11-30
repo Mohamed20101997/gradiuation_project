@@ -61,7 +61,9 @@ Route::group(['middleware'=>['auth:doctor'],'prefix'=>'doctor'], function () {
 
 /** Start Auth Section */
 
-Route::group(['middleware'=>['guest:admin,doctor'],'prefix'=>'admin'], function () {
+
+
+Route::group(['middleware'=>'guest','prefix'=>'admin'], function () {
     Route::get('login', 'AuthController@getLogin')->name('getLogin');
     Route::post('login', 'AuthController@login')->name('login');
 });

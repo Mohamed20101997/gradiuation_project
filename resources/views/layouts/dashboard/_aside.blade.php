@@ -13,6 +13,7 @@
   </div>
     @if(auth()->guard('admin')->check())
   <ul class="app-menu">
+      <li><a class="app-menu__item  {{\Request::route()->getName() == 'admin' ? 'active' : ''}}" href="{{ route('welcome') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
       <li><a class="app-menu__item  {{\Request::route()->getName() == 'admin.index' ? 'active' : ''}}" href="{{ route('admin.index') }}"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Admins</span></a></li>
       <li><a class="app-menu__item  {{\Request::route()->getName() == 'doctor.index' ? 'active' : ''}}" href="{{ route('doctor.index') }}"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Doctors</span></a></li>
       <li><a class="app-menu__item  {{\Request::route()->getName() == 'college.index' ? 'active' : ''}}" href="{{ route('college.index') }}"><i class="app-menu__icon fa fa-building"></i><span class="app-menu__label">Colleges</span></a></li>
@@ -21,6 +22,7 @@
       <li><a class="app-menu__item  {{\Request::route()->getName() == 'student.index' ? 'active' : ''}}" href="{{ route('student.index') }}"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Students</span></a></li>
   </ul>
     @else
+        <li><a class="app-menu__item  {{\Request::route()->getName() == 'admin' ? 'active' : ''}}" href="{{ route('welcome') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         @if(count(colleges()) > 0)
             @foreach(colleges() as $college)
                 <li><a class="app-menu__item" href="{{ route('colleges.index', $college->id) }}"><i class="app-menu__icon fa fa-building"></i><span class="app-menu__label">{{$college->name}}</span></a></li>

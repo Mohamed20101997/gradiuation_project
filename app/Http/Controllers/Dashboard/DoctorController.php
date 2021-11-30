@@ -23,7 +23,6 @@ class DoctorController extends Controller
 
     public function store(Request $request)
     {
-
         $request->validate([
             'email' => 'required|unique:doctors,email|email',
             'name' => 'required',

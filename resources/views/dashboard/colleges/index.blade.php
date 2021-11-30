@@ -32,7 +32,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         @if ($colleges->count() > 0)
-                            <table class="table table-hover table-responsive">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -61,6 +62,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            </div>
 
                             {{ $colleges->appends(request()->query())->links() }}
 

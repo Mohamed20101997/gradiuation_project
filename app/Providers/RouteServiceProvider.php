@@ -13,6 +13,7 @@ class RouteServiceProvider extends ServiceProvider
 
 
     public const HOME = '/';
+    public const ADMIN = '/admin';
 
 
     public function boot()

@@ -32,7 +32,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         @if ($subjects->count() > 0)
-                            <table class="table table-hover table-responsive">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -69,7 +70,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-
+                            </div>
                             {{ $subjects->appends(request()->query())->links() }}
 
                         @else

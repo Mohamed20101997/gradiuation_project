@@ -32,11 +32,14 @@
                 <div class="row">
                     <div class="col-md-12">
                         @if ($files->count() > 0)
-                            <table class="table table-hover table-responsive">
+                            <div class="table-responsive">
+
+                                <table class="table table-hover">
                                 <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>title</th>
+                                    <th>Uploads</th>
                                     <th>Description</th>
                                     <th>Actions</th>
                                 </tr>
@@ -47,6 +50,7 @@
                                     <tr>
                                         <td>{{ $index+1 }}</td>
                                         <td><a href="{{image_path($file->files)}}"  download="{{$file->title}}">{{ $file->title }}</a></td>
+                                        <td> <a href="{{image_path($file->files)}}"  download="{{$file->title}}"><i class="fa fa-download"></i></a> </td>
                                         <td>{{ strip_tags(Str::limit($file->description ,50,'...'))   }}</td>
 
                                         <td>
@@ -63,7 +67,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-
+                            </div>
                             {{ $files->appends(request()->query())->links() }}
 
                         @else

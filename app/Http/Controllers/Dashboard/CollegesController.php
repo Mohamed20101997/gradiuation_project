@@ -44,7 +44,7 @@ class CollegesController extends Controller
         ]);
 
 
-//        try{
+        try{
 
             $data = $request->except('_token');
 
@@ -63,9 +63,9 @@ class CollegesController extends Controller
 
             return redirect()->route('subject.doctor.files',$id);
 
-//        }catch(\Exception $e){
-//            return redirect()->back()->with(['error'=>'there is problem please try again']);
-//        }
+        }catch(\Exception $e){
+            return redirect()->back()->with(['error'=>'there is problem please try again']);
+        }
     }
 
     public function edit($id)
@@ -88,9 +88,9 @@ class CollegesController extends Controller
             $file =  DoctorSubject::where('id', $id)->first();
             if($request->file()){
 
-                remove_image('public',$file->files);
+                remove_previous($file);
 
-                $data['files'] = uploadImage('public', $request->file('files'));
+                $data['files'] = uploadImage('public_uploads', $request->file('files'));
 
             }
 
@@ -118,8 +118,8 @@ class CollegesController extends Controller
                 return redirect()->back()->with(['error'=>'file not found']);
             }
 
+            remove_previous($file);
 
-            remove_image('public_uploads',$file->files);
             $file->delete();
 
             session()->flash('success', 'File deleted successfully');

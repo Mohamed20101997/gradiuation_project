@@ -4,14 +4,17 @@
 use App\Models\College;
 
 function uploadImage($folder, $image){
-    $image->store('/public', $folder);
+    $image->store('/files', $folder);
     $filename = $image->hashName();
     return  $filename;
  }
 
-function remove_previous($folder,$model)
+function remove_previous($model)
  {
-    Storage::disk($folder)->delete($model->image);
+     $image_path = public_path().'/uploads/files/'.$model->files;
+     if(file_exists($image_path)){
+         unlink($image_path);
+     }
 
  } //end of remove_previous function
 

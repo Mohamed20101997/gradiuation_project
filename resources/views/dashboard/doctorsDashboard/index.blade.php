@@ -2,17 +2,22 @@
 
 @section('content')
 
-    <h1>Subjects</h1>
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-book"></i> Subjects</h1>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('welcome') }}">Dashboard</a></li>
+            <li class="breadcrumb-item" active>Subjects</li>
+        </ul>
 
-    <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('welcome') }}">Dashboard</a></li>
-        <li class="breadcrumb-item" active>Subjects</li>
-    </ul>
+    </div>
+
 
     <div class="row">
             @if ($subjects->count() > 0)
                 @foreach ($subjects as $index=>$subject)
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="tile">
                         <h3 class="tile-title"><i class="fa fa-book"></i> {{ $subject->name }}</h3>
 
