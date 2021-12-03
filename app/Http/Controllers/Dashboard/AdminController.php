@@ -11,6 +11,7 @@ class AdminController extends Controller
 
     public function index()
     {
+        dd('dd');
         $auth = auth()->guard('admin')->user()->id;
         $admins = Admin:: where('id', '!=', $auth)->whenSearch(Request()->search)->paginate(5);
         return view('dashboard.admins.index',compact('admins'));

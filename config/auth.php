@@ -47,6 +47,10 @@ return [
         ],'doctor' => [
             'driver' => 'session',
             'provider' => 'doctors',
+
+        ],'student' => [
+                    'driver' => 'session',
+                    'provider' => 'students',
         ],
 
         'api' => [
@@ -82,6 +86,10 @@ return [
          'admins' => [
              'driver' => 'eloquent',
              'model' => App\Models\Admin::class,
+         ],
+         'students' => [
+             'driver' => 'eloquent',
+             'model' => App\Models\Student::class,
          ],
     ],
 
