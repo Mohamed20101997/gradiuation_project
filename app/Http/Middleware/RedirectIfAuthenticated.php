@@ -25,10 +25,6 @@ class RedirectIfAuthenticated
 
                 return redirect(RouteServiceProvider::ADMIN);
 
-            }elseif(Auth::guard('student')->check()){
-
-                return redirect(RouteServiceProvider::HOME);
-
             }
         }
 

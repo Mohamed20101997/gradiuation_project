@@ -28,18 +28,10 @@ class AuthController extends Controller
 
     public function logout()
     {
-        $guard  = $this->getGaurd();
-        $guard->logout();
-        return redirect()->route('login');
+        auth('student')->logout();
+        return redirect()->route('front.login');
     }
 
-    private function getGaurd(){
-        if(auth()->guard('admin')->check()){
-            return auth('admin');
-        }else{
-            return auth('doctor');
-        }
-    }
 
 }
 

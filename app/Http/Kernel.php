@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\guestStudent;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -53,7 +54,8 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
-        'authDashboard' => \App\Http\Middleware\dashboardMiddleware::class,
+        'authStudent' => \App\Http\Middleware\authStudent::class,
+        'guestStudent' => \App\Http\Middleware\guestStudent::class,
         'jwt.token' => \App\Http\Middleware\jwtToken::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
