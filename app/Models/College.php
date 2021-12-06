@@ -15,7 +15,6 @@ class College extends Model
     }
 
 
-
     public function scopeWhenSearch($query , $search)
     {
         return $query->when($search , function($q) use ($search){

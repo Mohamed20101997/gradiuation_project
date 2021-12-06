@@ -2,6 +2,8 @@
 <?php
 
 use App\Models\College;
+use App\Models\Semester;
+use App\Models\Subjecte;
 
 function uploadImage($folder, $image){
     $image->store('/files', $folder);
@@ -37,7 +39,27 @@ function colleges(){
     })->get();
 
     return $colleges;
+}
 
+
+function getSemesters(){
+    $college_id = auth()->guard('student')->user()->college->id;
+
+    // get the all semesters if the Semester had a subject on this college
+
+    $semesters = Semester::whereHas('subject', function ($q) use ($college_id) {
+        return $q->where('college_id', $college_id);
+    })->get();
+
+    return $semesters;
+}
+
+function getSubjects(){
+    $college_id = auth()->guard('student')->user()->college->id;
+    // get the all Subjects if the semester_id  == $semester_id and  $college_id == $college_id
+    $subjects = Subjecte::where('college_id', $college_id)->get();
+
+    return $subjects;
 }
 
 

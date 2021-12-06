@@ -1,8 +1,8 @@
 (function($) {
-  'use strict';  
+  'use strict';
     /*---------------------------------
         Preloader JS
-    -----------------------------------*/ 
+    -----------------------------------*/
     var prealoaderOption = $(window);
     prealoaderOption.on("load", function () {
         var preloader = jQuery('.spinner');
@@ -14,21 +14,21 @@
         Preloader JS
     -----------------------------------*/
 
-    /*---------------------------------  
+    /*---------------------------------
         sticky header JS
     -----------------------------------*/
-    $(window).on('scroll',function() {    
+    $(window).on('scroll',function() {
         var scroll = $(window).scrollTop();
          if (scroll < 106) {
           $(".header_area").removeClass("sticky");
          }else{
           $(".header_area").addClass("sticky");
          }
-    }); 
-    /*---------------------------------  
+    });
+    /*---------------------------------
         sticky header JS
     -----------------------------------*/
-    /*---------------------------------  
+    /*---------------------------------
         Search JS
     -----------------------------------*/
     $(".search_btn,.close_link").on('click', function(e) {
@@ -43,7 +43,7 @@
       $(".sidenav_menu").toggleClass("active");
     });
     $.sidebarMenu($('.sidebar-menu'))
-    /*---------------------- 
+    /*----------------------
         Scroll top js
     ------------------------*/
     $(window).on('scroll', function() {
@@ -59,10 +59,10 @@
         }, 600);
         return false;
     });
-    /*---------------------- 
+    /*----------------------
         Scroll top js
     ------------------------*/
-    /*---------------------- 
+    /*----------------------
         slider js
     ------------------------*/
     $('.testimonial_slide_1').slick({
@@ -97,10 +97,10 @@
         slidesToShow: 1,
         slidesToScroll: 1
     });
-    /*---------------------- 
+    /*----------------------
         slider js
-    ------------------------*/  
-    /*---------------------- 
+    ------------------------*/
+    /*----------------------
         magnific-Popup js
     ----------------------*/
     $('.play_btn').magnificPopup({
@@ -108,7 +108,7 @@
         removalDelay: 300,
         mainClass: 'mfp-fade'
     });
-    /*---------------------- 
+    /*----------------------
         magnific-Popup js
     ----------------------*/
     /*----------------------
@@ -122,7 +122,7 @@
     /*----------------------
         Countdown Timer js
     ----------------------*/
-    if($('.offer_countdown').length){  
+    if($('.offer_countdown').length){
       $('.offer_countdown').each(function() {
       var $this = $(this), finalDate = $(this).data('countdown');
       $this.countdown(finalDate, function(event) {
@@ -132,4 +132,5 @@
     }
     // wow js
     new WOW().init();
-})(window.jQuery);   
+})(window.jQuery);
+

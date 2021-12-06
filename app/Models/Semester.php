@@ -16,4 +16,9 @@ class Semester extends Model
         });
 
     } //end of scopeWhenSearch
+
+
+    public function subject(){
+        return $this->hasMany(Subjecte::class , 'semester_id','id');
+    }
 }
